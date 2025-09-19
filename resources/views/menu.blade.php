@@ -4,120 +4,39 @@
     <div class="container">
         <h1 class="text-2xl font-bold mb-6">Our Menu</h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-                <h2 class="text-xl font-bold mb-4">Kebab in tortilla</h2>
-                <div class="space-y-4">
-                    <div class="flex justify-between">
-                        <span>Tortilla</span>
-                        <span>21,00 zł</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Tortilla with cheese</span>
-                        <span>25,00 zł</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Tortilla with fries</span>
-                        <span>25,00 zł</span>
-                    </div>
-                </div>
-            </div>
+        <form action="{{ route('menu') }}" method="GET" class="mb-6">
+            <label for="location" class="mr-2">Select Location:</label>
+            <select name="location" id="location" onchange="this.form.submit()">
+                @foreach ($locations as $location)
+                    <option value="{{ $location->id }}" {{ $selectedLocationId == $location->id ? 'selected' : '' }}>
+                        {{ $location->name }}
+                    </option>
+                @endforeach
+            </select>
+        </form>
 
-            <div>
-                <h2 class="text-xl font-bold mb-4">Kebab pita</h2>
-                <div class="space-y-4">
-                    <div class="flex justify-between">
-                        <span>Pita</span>
-                        <span>20,00 zł</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Pita with cheese</span>
-                        <span>24,00 zł</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Pita with fries</span>
-                        <span>24,00 zł</span>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <h2 class="text-xl font-bold mb-4">Kebab in a bun</h2>
-                <div class="space-y-4">
-                    <div class="flex justify-between">
-                        <span>Bun</span>
-                        <span>25,00 zł</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Bun with cheese</span>
-                        <span>29,00 zł</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Bun with fries</span>
-                        <span>29,00 zł</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @foreach ($categories as $category)
+                <div>
+                    <h2 class="text-xl font-bold mb-4">{{ $category->name }}</h2>
+                    <div class="space-y-4">
+                        @foreach ($category->menuItems as $item)
+                            <div class="flex justify-between">
+                                <span>{{ $item->name }}</span>
+                                @if ($item->locationPrices->isNotEmpty())
+                                    <span>{{ number_format($item->locationPrices->first()->price, 2) }} zł</span>
+                                    <form action="{{ route('cart.add') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="menu_item_id" value="{{ $item->id }}">
+                                        <input type="hidden" name="location_id" value="{{ $selectedLocationId }}">
+                                        <button type="submit" class="bg-primary hover:bg-primary-dark text-white px-3 py-1 rounded">Add to Cart</button>
+                                    </form>
+                                @endif
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-            </div>
-
-            <div>
-                <h2 class="text-xl font-bold mb-4">Kebab in a cup</h2>
-                <div class="space-y-4">
-                    <div class="flex justify-between">
-                        <span>Cup</span>
-                        <span>22,00 zł</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Cup with only meat</span>
-                        <span>40,00 zł</span>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <h2 class="text-xl font-bold mb-4">Vegetarian dishes</h2>
-                <div class="space-y-4">
-                    <div class="flex justify-between">
-                        <span>Falafel in tortilla</span>
-                        <span>18,00 zł</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Falafel in a cup</span>
-                        <span>21,00 zł</span>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <h2 class="text-xl font-bold mb-4">Extras</h2>
-                <div class="space-y-4">
-                    <div class="flex justify-between">
-                        <span>Fries small 150g</span>
-                        <span>11,00 zł</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Fries large 180g</span>
-                        <span>14,00 zł</span>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <h2 class="text-xl font-bold mb-4">Non-alcoholic drinks</h2>
-                <div class="space-y-4">
-                    <div class="flex justify-between">
-                        <span>Coca-Cola 0,5l</span>
-                        <span>8,00 zł</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Fanta Orange 0,5l</span>
-                        <span>8,00 zł</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Sprite 0,5l</span>
-                        <span>8,00 zł</span>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 @endsection
