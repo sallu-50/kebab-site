@@ -16,3 +16,15 @@ Route::get('/menu', function () {
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+
+Route::get('/reviews', function () {
+    return view('reviews');
+})->name('reviews');
+
+Route::get('/gallery', function () {
+    return view('gallery');
+})->name('gallery');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
