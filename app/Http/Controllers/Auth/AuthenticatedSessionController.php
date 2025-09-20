@@ -11,43 +11,29 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
     public function create(): View
     {
         return view('auth.login');
     }
 
-    /**
-     * Handle an incoming authentication request.
-     */
-   public function store(LoginRequest $request): RedirectResponse
-{
-    $request->authenticate();
-    $request->session()->regenerate();
+    public function store(LoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+        $request->session()->regenerate();
 
-    $user = $request->user();
+        $user = $request->user();
 
-    // Role check
-    if (in_array($user->role, ['admin', 'super_admin', 'manager'])) {
-        // Filament dashboard
-        return redirect()->intended(config('filament.path', 'admin'));
+        if (in_array($user->role, ['admin', 'super_admin', 'manager'])) {
+            return redirect()->intended(config('filament.path', 'admin'));
+        }
+
+        return redirect()->intended('/');
     }
 
-    // Regular user → home page
-    return redirect()->intended('/');
-}
-
-    /**
-     * Destroy an authenticated session.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/');
