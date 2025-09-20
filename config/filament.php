@@ -23,8 +23,8 @@ return [
         app_path('Filament/Pages'),
     ],
     'colors' => [
-        'primary' => \Filament\Support\Colors\Color::Amber,
-    ],
+    'primary' => 'amber',
+],
 
 
     /*
