@@ -14,6 +14,11 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                darkblue: '#00008B',
+                primary: '#191970', // A darker shade of darkblue
+                secondary: '#4169E1', // A royal blue shade
+            },
         },
     },
 

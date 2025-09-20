@@ -11,8 +11,26 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                        {{ __('Home') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('menu')" :active="request()->routeIs('menu')">
+                        {{ __('Menu') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
+                        {{ __('Cart') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                        {{ __('About') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
+                        {{ __('Contact') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('gallery')" :active="request()->routeIs('gallery')">
+                        {{ __('Gallery') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('reviews')" :active="request()->routeIs('reviews')">
+                        {{ __('Reviews') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -65,7 +83,7 @@
                         Login
                     </a>
                     <a href="{{ route('register') }}"
-                        class="ml-4 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">
+                        class="ml-4 px-4 py-2 text-sm font-medium text-white bg-secondary rounded-md hover:bg-secondary-700">
                         Register
                     </a>
                 @endauth
@@ -90,8 +108,26 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                {{ __('Home') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('menu')" :active="request()->routeIs('menu')">
+                {{ __('Menu') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
+                {{ __('Cart') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                {{ __('About') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
+                {{ __('Contact') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('gallery')" :active="request()->routeIs('gallery')">
+                {{ __('Gallery') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('reviews')" :active="request()->routeIs('reviews')">
+                {{ __('Reviews') }}
             </x-responsive-nav-link>
         </div>
 
@@ -124,7 +160,7 @@
                         Login
                     </a>
                     <a href="{{ route('register') }}"
-                        class="block px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">
+                        class="block px-4 py-2 text-sm font-medium text-white bg-secondary rounded-md hover:bg-secondary-700">
                         Register
                     </a>
                 </div>
