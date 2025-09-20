@@ -82,10 +82,12 @@
                     <a href="{{ route('login') }}" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900">
                         Login
                     </a>
+
                     <a href="{{ route('register') }}"
-                        class="ml-4 px-4 py-2 text-sm font-medium text-white bg-secondary rounded-md hover:bg-secondary-700">
+                        class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900">
                         Register
                     </a>
+
                 @endauth
             </div>
 
