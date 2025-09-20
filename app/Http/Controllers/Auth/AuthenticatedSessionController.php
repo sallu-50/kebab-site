@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('filament.admin.pages.dashboard'));
+        return redirect()->intended(config('filament.path', 'admin'));
     }
 
     /**
