@@ -7,7 +7,6 @@ use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Filament\Panel;
-use Filament\PanelProvider;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -17,14 +16,11 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Filament\Http\Middleware\Authenticate;
 
-class AdminPanelProvider extends PanelProvider
+class AdminPanelProvider extends ServiceProvider
 {
-    protected static string $name = 'admin';
-
-    public function panel(Panel $panel): Panel
+    public function boot(): void
     {
-        return $panel
-            ->id('admin')
+        Panel::make('admin')
             ->path('admin')
             ->login()
             ->colors([
