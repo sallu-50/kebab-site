@@ -22,14 +22,22 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+   public function store(LoginRequest $request): RedirectResponse
+{
+    $request->authenticate();
+    $request->session()->regenerate();
 
-        $request->session()->regenerate();
+    $user = $request->user();
 
+    // Role check
+    if (in_array($user->role, ['admin', 'super_admin', 'manager'])) {
+        // Filament dashboard
         return redirect()->intended(config('filament.path', 'admin'));
     }
+
+    // Regular user → home page
+    return redirect()->intended('/');
+}
 
     /**
      * Destroy an authenticated session.
